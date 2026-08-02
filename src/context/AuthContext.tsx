@@ -28,8 +28,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = 
-    return unsubscribe; onAuthStateChanged(auth, async (fbUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
   setFirebaseUser(fbUser);
   if (fbUser) {
     console.log('Firebase user found:', fbUser.uid);
@@ -41,6 +40,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
   setLoading(false);
 });
+    return unsubscribe;
   }, []);
 
   const signIn = async (email: string, password: string) => {
