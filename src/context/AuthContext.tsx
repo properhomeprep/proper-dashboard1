@@ -30,9 +30,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
       setFirebaseUser(fbUser);
-      if (fbUser) {
-        const userData = await getUser(fbUser.uid);
-        setUser(userData);
+     if (fbUser) {
+  console.log('Firebase user found:', fbUser.uid);
+  const userData = await getUser(fbUser.uid);
+  console.log('Firestore user data:', userData);
+  setUser(userData);
+}
       } else {
         setUser(null);
       }
