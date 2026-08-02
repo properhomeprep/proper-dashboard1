@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { initializeFirestore, persistentLocalCache } from 'firebase/firestore';
+import { getFirestore, enableNetwork } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
@@ -13,15 +13,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
-export const db = initializeFirestore(app, {
-  localCache: persistentLocalCache()
-});
+export const db = getFirestore(app);
 export const storage = getStorage(app);
 
+// Force Firestore online
+enableNetwork(db).catch(console.error);
+
 export default app;
-
-
-
 
