@@ -21,7 +21,7 @@ export const db = initializeFirestore(app, {
 export const storage = getStorage(app);
 
 export default app;
-Commit → Trigger deploy → Try logging in again! 🔧
+
 
 
 
