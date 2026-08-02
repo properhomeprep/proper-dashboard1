@@ -28,26 +28,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
-  setFirebaseUser(fbUser);
- if (fbUser) {
-  console.log('Firebase user found:', fbUser.uid);
-  try {
-    const userData = await getUser(fbUser.uid);
-    console.log('Firestore user data:', JSON.stringify(userData));
-    console.log('User role:', userData?.role);
-    setUser(userData);
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    setUser(null);
-  }
-} else {
-  setUser(null);
-}
-setLoading(false);
-});
-    return unsubscribe;
-  }, []);
+  const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+    setFirebaseUser(fbUser);
+    if (fbUser) {
+      console.log('Firebase user found:', fbUser.uid);
+      try {
+        const userData = await getUser(fbUser.uid);
+        console.log('Firestore user data:', JSON.stringify(userData));
+        console.log('User role:', userData?.role);
+        setUser(userData);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
+    setLoading(false);
+  });
+  return unsubscribe;
+}, []);
 
   const signIn = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password);
