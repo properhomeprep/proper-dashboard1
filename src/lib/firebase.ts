@@ -12,12 +12,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-console.log('Firebase config check:', {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ? '✅ set' : '❌ undefined',
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ? '✅ set' : '❌ undefined',
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ? '✅ set' : '❌ undefined',
-});
-
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = initializeFirestore(app, {
